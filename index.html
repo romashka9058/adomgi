@@ -9,6 +9,7 @@
 * {
   margin: 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 body {
   display: flex;
@@ -23,7 +24,7 @@ img, video {
   width: min(100vmin, 60rem); 
   aspect-ratio: 1/1;
 }
-.video-container {
+.video-container, video {
   position: fixed;
   top: 0;
   left: 0;
