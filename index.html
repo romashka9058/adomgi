@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href="./2.jpg">
+  <title>ADONGI</title>
 </head>
 <style>
 * {
@@ -20,9 +21,12 @@ body {
   background: #0d0d0d;
   filter: sepia(.4) blur(.5px) contrast(0.85) brightness(.7) saturate(2);
 }
-img, video {
+video {
   width: min(100vmin, 60rem); 
   aspect-ratio: 1/1;
+}
+#photo {
+  pointer-events: auto;
 }
 .video-container, video {
   position: fixed;
@@ -37,7 +41,9 @@ img, video {
 }
 </style>
 <body>
-    <img src="1.jpg" id="photo">
+    <video id="photo" preload="auto" muted>
+        <source src="0000-0150.mp4" type="video/mp4">
+    </video>
     <audio id="music" preload="auto"></audio>
     <div class="video-container" id="videoContainer">
         <video id="video1" preload="auto"></video>
