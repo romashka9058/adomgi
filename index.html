@@ -30,10 +30,6 @@ video {
 }
 #videoContainer, video {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,7 +60,7 @@ video {
             clicked = true;
             
             music.src = 'tagmp3_tmpsk2t1vco.mp3';
-            music.volume = 0.1; // Начальная тихая громкость
+            music.volume = 0.1;
             
             
             video1.src = '0000-0150.mp4';
@@ -72,12 +68,11 @@ video {
             video1.play();
             video2.style.display = 'none';
 
-            // Плавное увеличение громкости через 6 секунд
             setTimeout(() => {
               music.play();
                 let currentVolume = 0.05;
                 const volumeIncrease = setInterval(() => {
-                    currentVolume += 0.002; // Увеличиваем на 0.05 каждые 100ms
+                    currentVolume += 0.002; 
                     if (currentVolume >= 1) {
                         currentVolume = 1;
                         clearInterval(volumeIncrease);
