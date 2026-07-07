@@ -1,93 +1,86 @@
 <!DOCTYPE html>
-<html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="./2.jpg">
-  <title>ADONGI</title>
+<html lang="ru" translate="no">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="google" content="notranslate">
+    <meta name="color-scheme" content="light only">
+    <meta name="supported-color-schemes" content="light">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="stylesheet" href="https://romashka9058.github.io/style/main.css">
+    <link rel="icon" href="./2.jpg">
+    <title>ADONGI</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #000;
+            filter: sepia(.4) blur(.5px) brightness(.7) saturate(2);
+        }
+        
+        video {
+            width: min(100vmin, 60rem);
+            aspect-ratio: 1;
+            position: fixed;
+        }
+
+        
+        #video1, #video2 {
+            pointer-events: none;
+        }
+        
+        #video2 {
+            display: none;
+        }
+    </style>
 </head>
-<style>
-* {
-  margin: 0;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100dvh;
-  width: 100dvw;
-  background: #000;
-  filter: sepia(.4) blur(.5px) brightness(.7) saturate(2);
-}
-video {
-  width: min(100vmin, 60rem); 
-  aspect-ratio: 1/1;
-}
-#photo {
-  pointer-events: auto;
-}
-#videoContainer, video {
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  pointer-events: none;
-}
-</style>
+
 <body>
-
-    <audio id="music" preload="auto"></audio>
-
-    <video src="0000-0150.mp4" id="photo" preload="auto" muted></video>
-
-    <div id="videoContainer">
-        <video id="video1" preload="auto"></video>
-        <video id="video2" preload="auto" loop></video>
-    </div>
+    <audio id="music"></audio>
+    <video id="photo" src="0000-0150.mp4" muted></video>
+    <video id="video1" src="0000-0150.mp4"></video>
+    <video id="video2" src="0150-0300.mp4" loop></video>
 
     <script>
-        const photo = document.getElementById('photo');
-        const videoContainer = document.getElementById('videoContainer');
-        const video1 = document.getElementById('video1');
-        const video2 = document.getElementById('video2');
-        const music = document.getElementById('music');
-        let clicked = false;
-
-        photo.addEventListener('click', function() {
-            if (clicked) return;
-            clicked = true;
+        const els = {
+            photo: document.getElementById('photo'),
+            video1: document.getElementById('video1'),
+            video2: document.getElementById('video2'),
+            music: document.getElementById('music')
+        };
+        
+        let isPlaying = false;
+        
+        function fadeInVolume(audio, duration = 60) {
+            audio.volume = 0;
+            audio.play();
             
-            music.src = 'tagmp3_tmpsk2t1vco.mp3';
-            music.volume = 0.1;
+            const step = 1 / duration;
+            const timer = setInterval(() => {
+                audio.volume = Math.min(audio.volume + step, 1);
+                if (audio.volume >= 1) clearInterval(timer);
+            }, 100);
+        }
+        
+        els.photo.addEventListener('click', () => {
+            if (isPlaying) return;
+            isPlaying = true;
             
+            els.music.src = 'tagmp3_tmpsk2t1vco.mp3';
+            els.video1.play();
             
-            video1.src = '0000-0150.mp4';
-            video2.src = '0150-0300.mp4';
-            video1.play();
-            video2.style.display = 'none';
-
-            setTimeout(() => {
-              music.play();
-                let currentVolume = 0.05;
-                const volumeIncrease = setInterval(() => {
-                    currentVolume += 0.002; 
-                    if (currentVolume >= 1) {
-                        currentVolume = 1;
-                        clearInterval(volumeIncrease);
-                    }
-                    music.volume = currentVolume;
-                }, 100);
-            }, 6000);
+            setTimeout(() => fadeInVolume(els.music), 6000);
         });
-
-        video1.addEventListener('ended', () => {
-            video1.style.display = 'none';
-            video2.style.display = 'block';
-            video2.play();
+        
+        els.video1.addEventListener('ended', () => {
+            els.video1.style.display = 'none';
+            els.video2.style.display = 'block';
+            els.video2.play();
         });
-
     </script>
+    
 </body>
 </html>
