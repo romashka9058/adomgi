@@ -1,85 +1,86 @@
 <!DOCTYPE html>
 <html lang="ru" translate="no">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <meta name="google" content="notranslate">
-    <meta name="color-scheme" content="dark only">
-    <meta name="supported-color-schemes" content="dark">
-    <meta name="theme-color" content="#000000">
+        <meta name="google" content="notranslate">
+        <meta name="color-scheme" content="dark only">
+        <meta name="supported-color-schemes" content="dark">
+        <meta name="theme-color" content="#000000">
 
-    <link rel="stylesheet" href="https://romashka9058.github.io/style/main.css">
-    <link rel="icon" href="./2.jpg">
-    <title>ADONGI</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #000;
-            filter: sepia(.4) blur(.5px) brightness(.7) saturate(2);
-        }
+        <link rel="stylesheet" href="https://romashka9058.github.io/style/main.css">
+        <link rel="icon" href="./2.jpg">
+        <title>ADONGI</title>
         
-        video {
-            width: min(100vmin, 60rem);
-            aspect-ratio: 1;
-            position: fixed;
-        }
-
-        
-        #video1, #video2 {
-            pointer-events: none;
-        }
-        
-        #video2 {
-            display: none;
-        }
-    </style>
-</head>
-
-<body>
-    <audio id="music"></audio>
-    <video id="photo" src="0000-0150.mp4" muted></video>
-    <video id="video1" src="0000-0150.mp4"></video>
-    <video id="video2" src="0150-0300.mp4" loop></video>
-
-    <script>
-        const els = {
-            photo: document.getElementById('photo'),
-            video1: document.getElementById('video1'),
-            video2: document.getElementById('video2'),
-            music: document.getElementById('music')
-        };
-        
-        let isPlaying = false;
-        
-        function fadeInVolume(audio, duration = 60) {
-            audio.volume = 0;
-            audio.play();
+        <style>
+            body {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #000;
+                filter: sepia(.4) blur(.5px) brightness(.7) saturate(2);
+            }
             
-            const step = 1 / duration;
-            const timer = setInterval(() => {
-                audio.volume = Math.min(audio.volume + step, 1);
-                if (audio.volume >= 1) clearInterval(timer);
-            }, 100);
-        }
-        
-        els.photo.addEventListener('click', () => {
-            if (isPlaying) return;
-            isPlaying = true;
+            video {
+                width: min(100vmin, 60rem);
+                aspect-ratio: 1;
+                position: fixed;
+            }
+
             
-            els.music.src = 'tagmp3_tmpsk2t1vco.mp3';
-            els.video1.play();
+            #video1, #video2 {
+                pointer-events: none;
+            }
             
-            setTimeout(() => fadeInVolume(els.music), 6000);
-        });
-        
-        els.video1.addEventListener('ended', () => {
-            els.video1.style.display = 'none';
-            els.video2.style.display = 'block';
-            els.video2.play();
-        });
-    </script>
-</body>
+            #video2 {
+                display: none;
+            }
+        </style>
+    </head>
+
+    <body>
+        <audio id="music"></audio>
+        <video id="photo" src="0000-0150.mp4" muted></video>
+        <video id="video1" src="0000-0150.mp4"></video>
+        <video id="video2" src="0150-0300.mp4" loop></video>
+
+        <script>
+            const els = {
+                photo: document.getElementById('photo'),
+                video1: document.getElementById('video1'),
+                video2: document.getElementById('video2'),
+                music: document.getElementById('music')
+            };
+            
+            let isPlaying = false;
+            
+            function fadeInVolume(audio, duration = 60) {
+                audio.volume = 0;
+                audio.play();
+                
+                const step = 1 / duration;
+                const timer = setInterval(() => {
+                    audio.volume = Math.min(audio.volume + step, 1);
+                    if (audio.volume >= 1) clearInterval(timer);
+                }, 100);
+            }
+            
+            els.photo.addEventListener('click', () => {
+                if (isPlaying) return;
+                isPlaying = true;
+                
+                els.music.src = 'tagmp3_tmpsk2t1vco.mp3';
+                els.video1.play();
+                
+                setTimeout(() => fadeInVolume(els.music), 6000);
+            });
+            
+            els.video1.addEventListener('ended', () => {
+                els.video1.style.display = 'none';
+                els.video2.style.display = 'block';
+                els.video2.play();
+            });
+        </script>
+    </body>
 </html>
