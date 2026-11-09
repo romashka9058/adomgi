@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
         <meta name="google" content="notranslate">
         <meta name="color-scheme" content="dark only">
         <meta name="supported-color-schemes" content="dark">
@@ -12,7 +12,7 @@
         <link rel="stylesheet" href="https://romashka9058.github.io/style/main.css">
         <link rel="icon" href="./2.jpg">
         <title>ADONGI</title>
-        
+
         <style>
             body {
                 display: flex;
@@ -21,18 +21,18 @@
                 background: #000;
                 filter: sepia(.4) blur(.5px) brightness(.7) saturate(2);
             }
-            
+
             video {
                 width: min(100vmin, 60rem);
                 aspect-ratio: 1;
                 position: fixed;
             }
 
-            
+
             #video1, #video2 {
                 pointer-events: none;
             }
-            
+
             #video2 {
                 display: none;
             }
@@ -52,30 +52,30 @@
                 video2: document.getElementById('video2'),
                 music: document.getElementById('music')
             };
-            
+
             let isPlaying = false;
-            
+
             function fadeInVolume(audio, duration = 60) {
                 audio.volume = 0;
                 audio.play();
-                
+
                 const step = 1 / duration;
                 const timer = setInterval(() => {
                     audio.volume = Math.min(audio.volume + step, 1);
                     if (audio.volume >= 1) clearInterval(timer);
                 }, 100);
             }
-            
+
             els.photo.addEventListener('click', () => {
                 if (isPlaying) return;
                 isPlaying = true;
-                
+
                 els.music.src = 'tagmp3_tmpsk2t1vco.mp3';
                 els.video1.play();
-                
+
                 setTimeout(() => fadeInVolume(els.music), 6000);
             });
-            
+
             els.video1.addEventListener('ended', () => {
                 els.video1.style.display = 'none';
                 els.video2.style.display = 'block';
